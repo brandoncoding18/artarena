@@ -19,13 +19,45 @@ async def on_ready():
     for guild in bot.guilds:
         for member in guild.members:
             #print(member)
-            members[member.name.replace(".", "")] = str(member.id)
+            if(member.nick):
+                members[member.nick] = str(member.id)
+            members[member.display_name] = str(member.id)
+            members[member.name] = str(member.id)
+            members["<@" + str(member.id) + ">"] = str(member.id)
 
     print(members)
     
+# EVENT LISTENER FOR WHEN THE BOT NOTICES A CHANGE IN NICKNAME.
+
+@bot.event
+async def on_member_update(before, after): 
+    member = before 
+    if(member.nick):
+        del members[member.nick]
+            
+    del members[member.name]
+    del members["<@" + str(member.id) + ">"]
+
+    member = after
+    members[member.display_name] = str(member.id)
+    members[member.name] = str(member.id)
+    members["<@" + str(member.id) + ">"] = str(member.id)
+    print(members)
 
 
-    
+@bot.event
+async def on_user_update(before, after): 
+    member = before 
+        
+    del members[member.display_name]
+    del members[member.name]
+    del members["<@" + str(member.id) + ">"]
+
+    member = after
+    members[member.display_name] = str(member.id)
+    members[member.name] = str(member.id)
+    members["<@" + str(member.id) + ">"] = str(member.id)
+    print(members)
 
 
 # EVENT LISTENER FOR WHEN A NEW MESSAGE IS SENT TO A CHANNEL.
@@ -56,4 +88,4 @@ async def on_message(message):
 
     
 # EXECUTES THE BOT WITH THE SPECIFIED TOKEN. TOKEN HAS BEEN REMOVED AND USED JUST AS AN EXAMPLE.
-bot.run("MTEzNjM1NzU1NjIyNzQwODA3Mg.GTdkPy.xLVDYg1c2BJA4_tW2j-_O60sDKZpmjyy71xJoY")
+bot.run("MTEzNjM1NzU1NjIyNzQwODA3Mg.GmrYwg.Jx74TZKNAqSnxVnZPIBPLDacBZRVrxGRDWYRps")
