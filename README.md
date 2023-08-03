@@ -7,37 +7,50 @@ Art tussle!
 We want to make an artfight clone to encourage art gifting/trading year-round in the DIA server since AF is only once a year. This will be a custom discord bot since the alternative (artscuffle) has reached maximum server capacity.
 ## User Stories
 1. As an artist, I want to gift art to other users so that I can gain points for my team. 
-    - Mentioning a user should ???
+    - attacking a user should start a new thread with the image, the reciipient(s), and the sender. the image should be added to the database.
+    - attacking a user should add points to the user's total
 
 2. As an artist, I want to categorize features of my art so that I can gain points based on varying criteria
-    - ???
+    - only choose level of detail as a category (none of the other AF stuff)
+    - revenge chains should lead to higher point values (some x percent multiplier)
 
-3. As an artist, I want to view my team’s points so I can see who is winning
-    - ???
+3. As an artist, I want to view my points
+    -  if I send a text command, I should be able to view my point total for the permanent leaderboard and the seasonal leaderboard (if there is one)
+    -  if there is no seasonal leaderboard, show the permanent leaderboard and then say there is no current seasonal board
+  
+4. As an eboard member, I want server admins to delete inappropriate entries to keep the club experience compliant with NEU guidelines
+    - deleting a post does not interfere with other posts by the same user
+    - should be able to remove characters
+    - should be able to ban members from participating
 
-4. As an oc creator, I want to upload information about my characters so that other artists can draw them
+5. As a DIA eboard member, I want to reset the leaderboard every \[x] days
+    - the leaderboard entries should show the top \[x] users and their point totals
+    - 2 leaderboards: 1 seasonal (is reset every x days), 1 permanent (total points)
+
+6. As an oc creator, I want to upload information about my characters so that other artists can draw them
     - Characters should be able to have the same name
     - Character information should be viewable after creation
     - A character should have at least one reference image
       - If I do not upload an image upon creation, ???
+    - If I have an external doc, I can add a link that is displayed under the character profile
     - If creation is successful, ???
     - If creation is unsuccessful, ???
 
-5. As a typical user, I want to edit information about my characters so that I can keep them up-to-date at any time
+7. As a typical user, I want to edit information about my characters so that I can keep them up-to-date at any time
     - If an edit is successful, display a success message and display the new data
     - If an edit is unsuccessful, display a failure notification and the reason for failure
     - If I remove all reference images from a character, ???
 
-6. As a typical user, I want to delete characters so others can no longer see them
+8. As a typical user, I want to delete characters so others can no longer see them
     - Deleting a character should remove all information about them
     - If deletion is successful, total character count should decrease and the bot should send a success message
 
-7. As a power user with many ocs (Oto), I want to archive characters that I still like but no longer want art for so I can still see their attacks
+9. As a power user with many ocs (Oto), I want to archive characters that I still like but no longer want art for so I can still see their attacks
     - ???
 
-8. As an oc creator, I want to view the art that other users have made for me 
+10. As an oc creator, I want to view the art that other users have made for me 
 Conditions of satisfaction:
-    - ???
+    - if i enter a character id, the bot should display all images of that character (including reference images)
       
 ## Structure
 - MongoDB to store character images
