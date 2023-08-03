@@ -28,7 +28,6 @@ We want to make an artfight clone to encourage art gifting/trading year-round in
     - If an edit is unsuccessful, display a failure notification and the reason for failure
     - If I remove all reference images from a character, ???
 
-
 6. As a typical user, I want to delete characters so others can no longer see them
     - Deleting a character should remove all information about them
     - If deletion is successful, total character count should decrease and the bot should send a success message
@@ -39,7 +38,11 @@ We want to make an artfight clone to encourage art gifting/trading year-round in
 8. As an oc creator, I want to view the art that other users have made for me 
 Conditions of satisfaction:
     - ???
-
+      
+## Structure
+- MongoDB to store character images
+- [Ionos](https://www.ionos.com/hosting/web-hosting?transaction_id=102b2c50f44bb68beb0bf0f6883cfb&itc=RP0VPYCQ-1J1XUL-0Q1429E&ac=OM.US.USt02K418213T7073a&affiliate_id=1033&utm_source=affiliate&utm_medium=Webselenese+Ltd&utm_campaign=AFF-US-CLA-WHOS-1033-----&utm_content=) for web hosting ($4/month, 10gB server)
+  
 ## Potential Dev Issues
 1. Trying to clone the repo gives me this error: `Cloning into 'arttussle'...
 remote: Write access to repository not granted.
