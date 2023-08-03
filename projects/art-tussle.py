@@ -15,38 +15,12 @@ permitted_channel_id = 1136358266868346950
 # 
 @bot.event
 async def on_ready():
-    #channel = bot.get_channel(1136358266868346950)
-    #await channel.send("hiiiii")
+    
     for guild in bot.guilds:
         for member in guild.members:
             members.append(str(member.id))
-
     print(members)
     
-# EVENT LISTENER FOR WHEN THE BOT NOTICES A CHANGE IN NICKNAME.
-
-@bot.event
-async def on_member_update(before, after): 
-    
-    if(not before.nick and after.nick): 
-        members[after.nick] = after.id
-
-    if(not before.nick == after.nick):
-        del members[before.nick]
-
-
-@bot.event
-async def on_user_update(before, after): 
-    if(not before.display_name == after.display_name):
-        del members[before.display_name]
-        members[after.display_name] = after.id 
-
-    if(not before.name == after.name):
-        del members[before.name]
-        members[after.name] = after.id
-
-
-   
 
 
 
