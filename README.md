@@ -1,6 +1,7 @@
 # arttussle
 Art tussle!
 
+## [IF YOU'RE LOST](#potential-dev-issues)
 
 ## Problem Statement
 We want to make an artfight clone to encourage art gifting/trading year-round in the DIA server since AF is only once a year. This will be a custom discord bot since the alternative (artscuffle) has reached maximum server capacity.
@@ -39,3 +40,14 @@ We want to make an artfight clone to encourage art gifting/trading year-round in
 Conditions of satisfaction:
     - ???
 
+## Potential Dev Issues
+1. > Trying to clone the repo gives me this error: `Cloning into 'arttussle'...
+remote: Write access to repository not granted.
+fatal: unable to access 'https://github.com/jhieud/arttussle.git/': The requested URL returned error: 403`
+
+Solution: You might need to add a personal access token to your Github account. Follow the Github Documentation to add this.
+
+
+2. > Running art-tussle.py gives me an `SSLCertVerificationError` error with a ton of shit after it
+
+Solution: You may need to update your pip installation. On Mac, go to User/Applications/Python 3.x and double click the "Install Certificates.command" file. On anything else, idk lol
