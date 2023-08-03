@@ -7,23 +7,19 @@ intents.members = True
 intents.message_content = True
 bot = discord.Client(intents=intents)
 
-members = {}
-attack = 0
+members = []
 permitted_channel_id = 1136358266868346950
 
 # EVENT LISTENER FOR WHEN THE BOT HAS SWITCHED FROM OFFLINE TO ONLINE.
+# Method calls on startup
+# 
 @bot.event
 async def on_ready():
     #channel = bot.get_channel(1136358266868346950)
     #await channel.send("hiiiii")
     for guild in bot.guilds:
         for member in guild.members:
-            #print(member)
-            if(member.nick):
-                members[member.nick] = str(member.id)
-            members[member.display_name] = str(member.id)
-            members[member.name] = str(member.id)
-            members["<@" + str(member.id) + ">"] = str(member.id)
+            members.append(str(member.id))
 
     print(members)
     
@@ -31,33 +27,27 @@ async def on_ready():
 
 @bot.event
 async def on_member_update(before, after): 
-    member = before 
-    if(member.nick):
-        del members[member.nick]
-            
-    del members[member.name]
-    del members["<@" + str(member.id) + ">"]
+    
+    if(not before.nick and after.nick): 
+        members[after.nick] = after.id
 
-    member = after
-    members[member.display_name] = str(member.id)
-    members[member.name] = str(member.id)
-    members["<@" + str(member.id) + ">"] = str(member.id)
-    print(members)
+    if(not before.nick == after.nick):
+        del members[before.nick]
 
 
 @bot.event
 async def on_user_update(before, after): 
-    member = before 
-        
-    del members[member.display_name]
-    del members[member.name]
-    del members["<@" + str(member.id) + ">"]
+    if(not before.display_name == after.display_name):
+        del members[before.display_name]
+        members[after.display_name] = after.id 
 
-    member = after
-    members[member.display_name] = str(member.id)
-    members[member.name] = str(member.id)
-    members["<@" + str(member.id) + ">"] = str(member.id)
-    print(members)
+    if(not before.name == after.name):
+        del members[before.name]
+        members[after.name] = after.id
+
+
+   
+
 
 
 # EVENT LISTENER FOR WHEN A NEW MESSAGE IS SENT TO A CHANNEL.
