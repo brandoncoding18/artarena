@@ -1,7 +1,7 @@
 # arttussle
 Art tussle!
 
-## [IF YOU'RE LOST](#potential-dev-issues)
+## [***CLICK HERE IF YOU'RE HAVING DEV ISSUES***](#potential-dev-issues)
 
 ## Problem Statement
 We want to make an artfight clone to encourage art gifting/trading year-round in the DIA server since AF is only once a year. This will be a custom discord bot since the alternative (artscuffle) has reached maximum server capacity.
