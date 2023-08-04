@@ -49,23 +49,66 @@ async def on_message(message):
         msg = msg.split(" ")
         print(msg)
         if(msg[0] == "/attack"):
-             
-            if(msg[1].replace("<", '').replace(">", '').replace("@", '') in members):
+            recipient_id = msg[1].replace("<", '').replace(">", '').replace("@", '')
+            if(str(recipient_id) == str(message.author.id)): 
+                await message.channel.send("Cannot attack user with same id")
+                
+            elif(recipient_id in members):
                 await message.channel.send("Attacking " + msg[1])
-                thread = await channel.create_thread(name="thread", type=discord.ChannelType.public_thread)
-                await thread.send("omg hiiiiiiii <@" + str(message.author.id) + "> " + msg[1])
+                await message.channel.send("Please check your direct messages for instructions on your submission: " + "<@" + str(message.author.id) + ">")
+                hash = 12345
+                thread = await channel.create_thread(name="Attack " + str(hash), type=discord.ChannelType.private_thread)
+                await thread.send("Attack thread with id: " + str(hash) + 
+                                "\nAttacker: <@" + str(message.author.id) + ">" +  
+                                "\nRecipient: " + msg[1] +
+                                "\nCharacter: [id: char_name]" +
+                                "\nQuality: [quality]" + 
+                                "\nCalculated Score: [score]")
+                await thread.send(file=discord.File('sample_attack.jpg'))
+                await thread.send("Attack log will be updated shortly")
+
+
             else: 
                 await message.channel.send("User not found")
             
-                
+          
                     
 
                 
             #except: 
                 await message.channel.send("no arguments given \n\n Commands: \n\n /attack [user] [] ")
         
-        if(message.content == "/fight-history"):
-           await message.channel.send("No fights are recorded for this user")
+        if(msg[0] == "/fight-history"):
+            try: 
+                target = msg[1].replace("<", '').replace(">", '').replace("@", '')
+                if(target in members):
+                    await message.channel.send("[Unimplemented Feature]")
+
+                else: 
+                    await message.channel.send("User not found")
+
+
+
+
+            except:
+                await message.channel.send("User not provided, please provide argument like so: /fight-history @[user]")
+
+        if(msg[0] == "/leaderboard"):
+            
+            try: 
+                if(msg[1]):
+                    await message.channel.send("/leaderboard does not accept additional arguments")
+                    
+
+            except:
+                await message.channel.send("[Unimplemented]")
+
+
+        
+
+        
+
+        
 
         
 
