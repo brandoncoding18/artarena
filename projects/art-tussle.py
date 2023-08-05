@@ -176,6 +176,8 @@ async def on_message(message):
                     await thread.send(file=discord.File(str(pending_attacks[index].getUrl())))
                     await thread.send("Attack log will be updated shortly")
 
+                    #insert database attack(id, attacker, recipient, image, char_id)
+
 
 
 
