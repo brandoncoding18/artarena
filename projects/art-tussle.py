@@ -84,12 +84,15 @@ async def send_dm(ctx, member: discord.Member, *, content):
 @bot.event
 async def on_member_join(member):
     members.append(str(member.id))
+    #Database insert (snowflake, username)
     
 
 
 @bot.event
 async def on_member_remove(member):
     members.remove(str(member.id))
+    #Database remove (snowflake, username)
+
 
 async def sendDm(id, content):
     user = await bot.fetch_user(id)
