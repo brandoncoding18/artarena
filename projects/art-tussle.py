@@ -1,12 +1,19 @@
 import discord
 from discord.ext import commands
 import requests
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
+from mydb import *
 
 # GETS THE CLIENT OBJECT FROM DISCORD.PY. CLIENT IS SYNONYMOUS WITH BOT.
 intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
 bot = discord.Client(intents=intents)
+
+
+
+
 
 members = []
 pending_attacks = []
@@ -72,10 +79,16 @@ class Attack:
 @bot.event
 async def on_ready():
     
+    insert = []
+    i = 0 
     for guild in bot.guilds:
         for member in guild.members:
+            i += 1
             members.append(str(member.id))
-    print(members)
+            insert.append({ "_id" : member.id})
+
+    insertMany("Users", insert)
+    
 
 async def send_dm(ctx, member: discord.Member, *, content):
     channel = await member.create_dm()
@@ -167,14 +180,25 @@ async def on_message(message):
                     channel = await bot.fetch_channel(permitted_channel_id)
                     #await channel.send(file=discord.File(local_url))
                     thread = await channel.create_thread(name="Attack:" , type=discord.ChannelType.private_thread)
+                    id = str(hash(recipient))
+                    attacker =  str(message.author.id)
+                    recipient = str(pending_attacks[index].getRecipient())
+                    character = str(pending_attacks[index].getCharID()) 
+                    quality = str(pending_attacks[index].getQuality())
+                    score = str(pending_attacks[index].getQuality())
+                    image = str(pending_attacks[index].getUrl())
+                    
+
                     await thread.send("Attack thread with id: " + str(hash(recipient)) + 
-                                    "\nAttacker: <@" + str(message.author.id) + ">" +  
-                                    "\nRecipient: <@" + str(pending_attacks[index].getRecipient()) + ">" +
-                                    "\nCharacter: " + str(pending_attacks[index].getCharID()) +
-                                    "\nQuality: " + str(pending_attacks[index].getQuality()) +
-                                    "\nCalculated Score: " + str(pending_attacks[index].getQuality()))
+                                    "\nAttacker: <@" + attacker + ">" +  
+                                    "\nRecipient: <@" + recipient + ">" +
+                                    "\nCharacter: " + character +
+                                    "\nQuality: " + quality +
+                                    "\nCalculated Score: " + score)
                     await thread.send(file=discord.File(str(pending_attacks[index].getUrl())))
                     await thread.send("Attack log will be updated shortly")
+                    mylist = [{ "_id" : 1, "attacker" : attacker, "recipient" : recipient, "character" : character, "quality" : quality, "score" : score, "url" : image}]
+                    insertMany("Attacks", mylist)
 
                     #insert database attack(id, attacker, recipient, image, char_id)
 
