@@ -78,7 +78,7 @@ class Attack:
 # 
 @bot.event
 async def on_ready():
-    
+    dropAll()
     insert = []
     i = 0 
     for guild in bot.guilds:

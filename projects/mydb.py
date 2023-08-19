@@ -16,4 +16,9 @@ db = client["ArtArena"]
 def insertMany(col_name, mylist):
     collection = db[str(col_name)]
     collection.insert_many(mylist)
- 
+
+def dropAll(): 
+    for collection in db.list_collection_names(): 
+        col = db[str(collection)]
+        col.drop()
+        print("Successfully dropped: " + collection)
