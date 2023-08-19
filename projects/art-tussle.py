@@ -145,12 +145,12 @@ async def on_message(message):
                 url = img[img.index("url"): len(img)].replace("url=", "").replace(">]", "").replace("\'", "")
                 await message.channel.send(url)
                 print(url)
-                ftype = url.split('/')[-1]
-                myfile = requests.get(url)
-                local_url = f'/tmp/file.{ftype}'
-                open(local_url, 'wb').write(myfile.content)
+                #ftype = url.split('/')[-1]
+                #myfile = requests.get(url)
+                #local_url = f'/tmp/file.{ftype}'
+                #open(local_url, 'wb').write(myfile.content)
                 pending_images.remove(pending_attacks[index].getAttacker())
-                pending_attacks[index].setUrl(local_url)
+                pending_attacks[index].setUrl(url)
                 await message.channel.send(str(pending_attacks[index]))
                 await message.channel.send("Please submit character id")
 
@@ -195,7 +195,8 @@ async def on_message(message):
                                     "\nCharacter: " + character +
                                     "\nQuality: " + quality +
                                     "\nCalculated Score: " + score)
-                    await thread.send(file=discord.File(str(pending_attacks[index].getUrl())))
+                    await thread.send(str(pending_attacks[index].getUrl()))
+                   # await thread.send(file=discord.File(str(pending_attacks[index].getUrl())))
                     await thread.send("Attack log will be updated shortly")
                     mylist = [{ "_id" : 1, "attacker" : attacker, "recipient" : recipient, "character" : character, "quality" : quality, "score" : score, "url" : image}]
                     insertMany("Attacks", mylist)
